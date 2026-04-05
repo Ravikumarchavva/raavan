@@ -1,0 +1,547 @@
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Production-ready Python framework for building autonomous AI agents with tool calling, memory management, and durable execution."><link href=https://ravikumarchavva.github.io/raavan/ARCHITECTURE_DIAGRAMS/ rel=canonical><link rel=icon href=../assets/logo.svg><meta name=generator content="mkdocs-1.6.1, mkdocs-material-9.7.6"><title>Agent Framework — Architecture Diagrams - Raavan Agent Framework</title><link rel=stylesheet href=../assets/stylesheets/main.484c7ddc.min.css><link rel=stylesheet href=../assets/stylesheets/palette.ab4e12ef.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../css/timeago.css><link rel=stylesheet href=../assets/_mkdocstrings.css><link rel=stylesheet href=../stylesheets/extra.css><script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><script id=__analytics>function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config",""),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script><script>"undefined"!=typeof __md_analytics&&__md_analytics()</script></head> <body dir=ltr data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=cyan> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#agent-framework-architecture-diagrams class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <div data-md-color-scheme=default data-md-component=outdated hidden> </div> <header class="md-header md-header--shadow md-header--lifted" data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=.. title="Raavan Agent Framework" class="md-header__button md-logo" aria-label="Raavan Agent Framework" data-md-component=logo> <img src=../assets/logo.svg alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> Raavan Agent Framework </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Agent Framework — Architecture Diagrams </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme=slate data-md-color-primary=deep-purple data-md-color-accent=cyan aria-label="Switch to light mode" type=radio name=__palette id=__palette_0> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> <input class=md-option data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme=default data-md-color-primary=deep-purple data-md-color-accent=cyan aria-label="Switch to dark mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_0 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg> </label> </form> <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" title=Share aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg> </a> <button type=reset class="md-search__icon md-icon" title=Clear aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap tabindex=0 data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list role=presentation></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/Ravikumarchavva/raavan title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg> </div> <div class=md-source__repository> Ravikumarchavva/raavan </div> </a> </div> </nav> <nav class=md-tabs aria-label=Tabs data-md-component=tabs> <div class=md-grid> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../getting-started/index.md class=md-tabs__link> Getting Started </a> </li> <li class=md-tabs__item> <a href=../concepts/index.md class=md-tabs__link> Core Concepts </a> </li> <li class=md-tabs__item> <a href=../runtime/index.md class=md-tabs__link> Durable Runtime </a> </li> <li class=md-tabs__item> <a href=../tools/index.md class=md-tabs__link> Tools Reference </a> </li> <li class=md-tabs__item> <a href=../deployment/index.md class=md-tabs__link> Deployment </a> </li> <li class=md-tabs__item> <a href=../observability/index.md class=md-tabs__link> Observability </a> </li> <li class=md-tabs__item> <a href=../evals/index.md class=md-tabs__link> Evaluation </a> </li> <li class=md-tabs__item> <a href=../design-patterns/index.md class=md-tabs__link> Design Patterns </a> </li> <li class=md-tabs__item> <a href=../api/index.md class=md-tabs__link> API Reference </a> </li> <li class=md-tabs__item> <a href=../changelog.md class=md-tabs__link> Changelog </a> </li> </ul> </div> </nav> </header> <div class=md-container data-md-component=container> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=.. title="Raavan Agent Framework" class="md-nav__button md-logo" aria-label="Raavan Agent Framework" data-md-component=logo> <img src=../assets/logo.svg alt=logo> </a> Raavan Agent Framework </label> <div class=md-nav__source> <a href=https://github.com/Ravikumarchavva/raavan title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg> </div> <div class=md-source__repository> Ravikumarchavva/raavan </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=.. class=md-nav__link> <span class=md-ellipsis> Home </span> </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_2> <label class=md-nav__link for=__nav_2 id=__nav_2_label tabindex=0> <span class=md-ellipsis> Getting Started </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_2_label aria-expanded=false> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> Getting Started </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../getting-started/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../getting-started/quickstart.md class=md-nav__link> <span class=md-ellipsis> Quick Start </span> </a> </li> <li class=md-nav__item> <a href=../getting-started/installation.md class=md-nav__link> <span class=md-ellipsis> Installation </span> </a> </li> <li class=md-nav__item> <a href=../getting-started/configuration.md class=md-nav__link> <span class=md-ellipsis> Configuration </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_3> <label class=md-nav__link for=__nav_3 id=__nav_3_label tabindex=0> <span class=md-ellipsis> Core Concepts </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_3_label aria-expanded=false> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> Core Concepts </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../concepts/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../concepts/architecture.md class=md-nav__link> <span class=md-ellipsis> Architecture </span> </a> </li> <li class=md-nav__item> <a href=../concepts/react-agent.md class=md-nav__link> <span class=md-ellipsis> ReAct Agent Loop </span> </a> </li> <li class=md-nav__item> <a href=../concepts/memory.md class=md-nav__link> <span class=md-ellipsis> Memory System </span> </a> </li> <li class=md-nav__item> <a href=../concepts/tools.md class=md-nav__link> <span class=md-ellipsis> Tool System </span> </a> </li> <li class=md-nav__item> <a href=../concepts/guardrails.md class=md-nav__link> <span class=md-ellipsis> Guardrails </span> </a> </li> <li class=md-nav__item> <a href=../concepts/mcp.md class=md-nav__link> <span class=md-ellipsis> MCP Integration </span> </a> </li> <li class=md-nav__item> <a href=../concepts/sse-streaming.md class=md-nav__link> <span class=md-ellipsis> SSE Streaming </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_4> <label class=md-nav__link for=__nav_4 id=__nav_4_label tabindex=0> <span class=md-ellipsis> Durable Runtime </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_4_label aria-expanded=false> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> Durable Runtime </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../runtime/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../runtime/restate.md class=md-nav__link> <span class=md-ellipsis> Restate Integration </span> </a> </li> <li class=md-nav__item> <a href=../runtime/workflows.md class=md-nav__link> <span class=md-ellipsis> Workflows </span> </a> </li> <li class=md-nav__item> <a href=../runtime/activities.md class=md-nav__link> <span class=md-ellipsis> Activities </span> </a> </li> <li class=md-nav__item> <a href=../runtime/tool-policies.md class=md-nav__link> <span class=md-ellipsis> Tool Policies </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_5> <label class=md-nav__link for=__nav_5 id=__nav_5_label tabindex=0> <span class=md-ellipsis> Tools Reference </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_5_label aria-expanded=false> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> Tools Reference </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../tools/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../tools/building-a-tool.md class=md-nav__link> <span class=md-ellipsis> Building a Tool </span> </a> </li> <li class=md-nav__item> <a href=../tools/human-input.md class=md-nav__link> <span class=md-ellipsis> Human Input (HITL) </span> </a> </li> <li class=md-nav__item> <a href=../tools/task-manager.md class=md-nav__link> <span class=md-ellipsis> Task Manager </span> </a> </li> <li class=md-nav__item> <a href=../tools/web-surfer.md class=md-nav__link> <span class=md-ellipsis> Web Surfer </span> </a> </li> <li class=md-nav__item> <a href=../tools/code-interpreter.md class=md-nav__link> <span class=md-ellipsis> Code Interpreter </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_6> <label class=md-nav__link for=__nav_6 id=__nav_6_label tabindex=0> <span class=md-ellipsis> Deployment </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_6_label aria-expanded=false> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> Deployment </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../deployment/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../deployment/monolith.md class=md-nav__link> <span class=md-ellipsis> Monolith (local) </span> </a> </li> <li class=md-nav__item> <a href=../deployment/docker.md class=md-nav__link> <span class=md-ellipsis> Docker Compose </span> </a> </li> <li class=md-nav__item> <a href=../deployment/kubernetes.md class=md-nav__link> <span class=md-ellipsis> Kubernetes (Kind) </span> </a> </li> <li class=md-nav__item> <a href=../deployment/microservices.md class=md-nav__link> <span class=md-ellipsis> Microservices </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_7> <label class=md-nav__link for=__nav_7 id=__nav_7_label tabindex=0> <span class=md-ellipsis> Observability </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_7_label aria-expanded=false> <label class=md-nav__title for=__nav_7> <span class="md-nav__icon md-icon"></span> Observability </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../observability/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../observability/logging.md class=md-nav__link> <span class=md-ellipsis> Logging </span> </a> </li> <li class=md-nav__item> <a href=../observability/tracing.md class=md-nav__link> <span class=md-ellipsis> Tracing (OpenTelemetry) </span> </a> </li> <li class=md-nav__item> <a href=../observability/grafana.md class=md-nav__link> <span class=md-ellipsis> Grafana Dashboards </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_8> <label class=md-nav__link for=__nav_8 id=__nav_8_label tabindex=0> <span class=md-ellipsis> Evaluation </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_8_label aria-expanded=false> <label class=md-nav__title for=__nav_8> <span class="md-nav__icon md-icon"></span> Evaluation </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../evals/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../evals/running.md class=md-nav__link> <span class=md-ellipsis> Running Evals </span> </a> </li> <li class=md-nav__item> <a href=../evals/criteria.md class=md-nav__link> <span class=md-ellipsis> Custom Criteria </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_9> <label class=md-nav__link for=__nav_9 id=__nav_9_label tabindex=0> <span class=md-ellipsis> Design Patterns </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_9_label aria-expanded=false> <label class=md-nav__title for=__nav_9> <span class="md-nav__icon md-icon"></span> Design Patterns </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../design-patterns/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../design-patterns/creational.md class=md-nav__link> <span class=md-ellipsis> Creational </span> </a> </li> <li class=md-nav__item> <a href=../design-patterns/structural.md class=md-nav__link> <span class=md-ellipsis> Structural </span> </a> </li> <li class=md-nav__item> <a href=../design-patterns/behavioral.md class=md-nav__link> <span class=md-ellipsis> Behavioral </span> </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type=checkbox id=__nav_10> <label class=md-nav__link for=__nav_10 id=__nav_10_label tabindex=0> <span class=md-ellipsis> API Reference </span> <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav data-md-level=1 aria-labelledby=__nav_10_label aria-expanded=false> <label class=md-nav__title for=__nav_10> <span class="md-nav__icon md-icon"></span> API Reference </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../api/index.md class=md-nav__link> <span class=md-ellipsis> None </span> </a> </li> <li class=md-nav__item> <a href=../api/core-agents.md class=md-nav__link> <span class=md-ellipsis> core.agents </span> </a> </li> <li class=md-nav__item> <a href=../api/core-tools.md class=md-nav__link> <span class=md-ellipsis> core.tools </span> </a> </li> <li class=md-nav__item> <a href=../api/core-memory.md class=md-nav__link> <span class=md-ellipsis> core.memory </span> </a> </li> <li class=md-nav__item> <a href=../api/core-guardrails.md class=md-nav__link> <span class=md-ellipsis> core.guardrails </span> </a> </li> <li class=md-nav__item> <a href=../api/integrations-llm.md class=md-nav__link> <span class=md-ellipsis> integrations.llm </span> </a> </li> <li class=md-nav__item> <a href=../api/integrations-memory.md class=md-nav__link> <span class=md-ellipsis> integrations.memory </span> </a> </li> <li class=md-nav__item> <a href=../api/integrations-mcp.md class=md-nav__link> <span class=md-ellipsis> integrations.mcp </span> </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../changelog.md class=md-nav__link> <span class=md-ellipsis> Changelog </span> </a> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=sidebar data-md-type=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"></span> Table of contents </label> <ul class=md-nav__list data-md-component=toc data-md-scrollfix> <li class=md-nav__item> <a href=#1-top-level-component-map class=md-nav__link> <span class=md-ellipsis> 1. Top-Level Component Map </span> </a> </li> <li class=md-nav__item> <a href=#2-eventbus-how-events-flow-from-agent-to-sse class=md-nav__link> <span class=md-ellipsis> 2. EventBus — How Events Flow from Agent to SSE </span> </a> </li> <li class=md-nav__item> <a href=#3-webhitlbridge-hitl-approval-sequence class=md-nav__link> <span class=md-ellipsis> 3. WebHITLBridge — HITL Approval Sequence </span> </a> </li> <li class=md-nav__item> <a href=#4-reactagent-react-loop-internals class=md-nav__link> <span class=md-ellipsis> 4. ReActAgent — ReAct Loop Internals </span> </a> </li> <li class=md-nav__item> <a href=#5-memory-system-redis-hot-path-postgresql-cold-store class=md-nav__link> <span class=md-ellipsis> 5. Memory System — Redis Hot Path + PostgreSQL Cold Store </span> </a> </li> <li class=md-nav__item> <a href=#6-servercontext-di-container-locks-and-cancel-registry class=md-nav__link> <span class=md-ellipsis> 6. ServerContext — DI Container, Locks and Cancel Registry </span> </a> </li> <li class=md-nav__item> <a href=#7-complete-end-to-end-flow class=md-nav__link> <span class=md-ellipsis> 7. Complete End-to-End Flow </span> </a> </li> <li class=md-nav__item> <a href=#8-file-storage-architecture class=md-nav__link> <span class=md-ellipsis> 8. File Storage Architecture </span> </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1 id=agent-framework-architecture-diagrams>Agent Framework — Architecture Diagrams<a class=headerlink href=#agent-framework-architecture-diagrams title="Permanent link">&para;</a></h1> <p>Eight diagrams covering every layer of the system, from individual components to the full end-to-end request flow.</p> <hr> <h2 id=1-top-level-component-map>1. Top-Level Component Map<a class=headerlink href=#1-top-level-component-map title="Permanent link">&para;</a></h2> <p>Shows every module and how they connect. The frontend talks only to FastAPI routes; routes pull all dependencies from <code>ServerContext</code> via <code>Depends(get_ctx)</code>; the agent uses Redis + Postgres for memory; the LLM is OpenAI.</p> <pre class=mermaid><code>graph TB
+    subgraph Frontend["🖥️ Next.js Frontend (ai-chatbot-ui)"]
+        UI[page.tsx\nChat UI]
+        SSEClient[EventSource\nSSE Consumer]
+        HIC[HumanInputCard]
+        TAC[ToolApprovalCard]
+        KB[KanbanPanel]
+    end
+
+    subgraph FastAPI["⚙️ FastAPI Server (agent-framework)"]
+        subgraph Routes["server/routes/"]
+            ChatRoute[POST /chat\nchat.py]
+            HITLRoute[POST /chat/respond\nhitl.py]
+            CancelRoute[POST /chat/cancel\ncancel.py]
+            TasksRoute["GET/PATCH /tasks\ntasks.py"]
+            ThreadsRoute[threads.py]
+            FilesRoute["GET/POST/DELETE /files\nfiles.py"]
+        end
+
+        subgraph Context["server/context.py"]
+            ServerCtx[ServerContext\nDI Container]
+        end
+
+        subgraph Services["server/services/"]
+            AgentSvc[agent_service.py\nAgent factory +\nmemory restore]
+            FileSvc[file_service.py\nsave / extract / purge]
+        end
+
+        subgraph SSE["server/sse/"]
+            EB[EventBus\nevents.py]
+            HITL[WebHITLBridge\nbridge.py]
+            BR[BridgeRegistry\nbridge.py]
+        end
+
+        subgraph Agent["core/agents/"]
+            ReAct[ReActAgent\nreact_agent.py]
+        end
+
+        subgraph Memory["core/memory/"]
+            RM[RedisMemory]
+            UBM[UnboundedMemory]
+            SWC[SlidingWindowContext]
+        end
+
+        subgraph FileSystem["core/storage/"]
+            FSAbC[FileStore ABC\nbase.py]
+            LocalFS[LocalFileStore\nlocal.py]
+            S3FS[S3FileStore\ns3.py]
+            EncFS[EncryptedFileStore\nencrypted.py]
+            TC[TenantContext\ntenant.py]
+            FSFact[create_file_store\nfactory.py]
+        end
+
+        subgraph Tools["tools/"]
+            AHT[AskHumanTool\nHITL input]
+            TMT[TaskManagerTool\nKanban board]
+            FMT[FileManagerTool\nagent file CRUD]
+            BT[BuiltinTools\ncalculator, time, etc.]
+            MCP[MCPTools\nexternal integrations]
+        end
+    end
+
+    subgraph Storage["💾 Storage"]
+        Redis[(Redis 7\nHot session store)]
+        PG[(PostgreSQL 16\nCold / persistent store\n+ FileMetadata table)]
+        ObjStore[(LocalFS volume\nor MinIO / S3\nFile object store)]
+    end
+
+    subgraph LLM["🤖 LLM Provider"]
+        OAI[OpenAI API\ngpt-4o-mini]
+    end
+
+    UI --&gt;|POST /chat| ChatRoute
+    SSEClient --&gt;|SSE stream| ChatRoute
+    HIC --&gt;|POST /chat/respond| HITLRoute
+    TAC --&gt;|POST /chat/respond| HITLRoute
+    KB --&gt;|GET /tasks| TasksRoute
+    UI --&gt;|POST /files upload| FilesRoute
+
+    ChatRoute --&gt;|Depends get_ctx| ServerCtx
+    HITLRoute --&gt;|Depends get_ctx| ServerCtx
+    CancelRoute --&gt;|Depends get_ctx| ServerCtx
+    FilesRoute --&gt;|Depends get_ctx| ServerCtx
+
+    ServerCtx --&gt; BR
+    ServerCtx --&gt; RM
+    ServerCtx --&gt; BT
+    ServerCtx --&gt; FSAbC
+
+    ChatRoute --&gt; AgentSvc
+    AgentSvc --&gt; ReAct
+    AgentSvc --&gt; RM
+
+    FilesRoute --&gt; FileSvc
+    FileSvc --&gt; FSAbC
+    FileSvc --&gt; PG
+
+    ChatRoute --&gt; FileSvc
+
+    FSFact --&gt; LocalFS
+    FSFact --&gt; S3FS
+    LocalFS &amp; S3FS --&gt; EncFS
+    FSAbC --&gt; TC
+    LocalFS -.-&gt; ObjStore
+    S3FS -.-&gt; ObjStore
+
+    ReAct --&gt;|run_stream| EB
+    ReAct --&gt; OAI
+    ReAct --&gt; Tools
+    ReAct --&gt; FMT
+
+    FMT --&gt; FSAbC
+    FMT --&gt; PG
+
+    EB --&gt;|typed events| ChatRoute
+    HITL --&gt;|HITL events| ChatRoute
+
+    BR --&gt;|acquire/release| HITL
+    HITLRoute --&gt;|resolve| BR
+
+    RM &lt;--&gt; Redis
+    AgentSvc &lt;--&gt; PG</code></pre> <hr> <h2 id=2-eventbus-how-events-flow-from-agent-to-sse>2. EventBus — How Events Flow from Agent to SSE<a class=headerlink href=#2-eventbus-how-events-flow-from-agent-to-sse title="Permanent link">&para;</a></h2> <p>The <code>EventBus</code> is a <strong>typed wrapper around <code>asyncio.Queue</code></strong>. Two background tasks write into it: - <code>agent_worker</code> emits strongly-typed events (<code>TextDeltaEvent</code>, <code>CompletionEvent</code>, etc.) - <code>hitl_worker</code> drains the bridge's outgoing queue and re-emits as <code>RawDictEvent</code></p> <p>The SSE generator polls the bus every 200 ms. On a <code>TimeoutError</code> it checks for browser disconnect or explicit cancel. When <code>bus.close()</code> is called it pushes the <code>BUS_CLOSED</code> sentinel which tells the consumer to stop.</p> <pre class=mermaid><code>graph LR
+    subgraph Producers["Producers (write to bus)"]
+        AW[agent_worker\nasyncio Task]
+        HW[hitl_worker\nasyncio Task]
+    end
+
+    subgraph EventBus["EventBus — asyncio.Queue wrapper"]
+        Q[asyncio.Queue\ntyped AgentEvent items]
+        SENTINEL[_BUS_DONE sentinel\npublic alias: BUS_CLOSED]
+        EMIT[emit — put typed event]
+        EMITD[emit_dict — wrap as RawDictEvent]
+        POLL[poll timeout 200ms\nraises TimeoutError if empty]
+        CLOSE[close — push BUS_CLOSED\nidempotent]
+    end
+
+    subgraph EventTypes["Typed Events emitted by agent_worker"]
+        TDE[TextDeltaEvent\nstreaming text chunk]
+        RDE[ReasoningDeltaEvent\nthinking chunk]
+        TCE[ToolCallEvent\ntool requested]
+        TRE[ToolResultEvent\ntool completed]
+        TARE[ToolApprovalRequestEvent\nwaiting approval]
+        HIRE[HumanInputRequestEvent\nwaiting input]
+        CE[CompletionEvent\nagent done]
+        EE[ErrorEvent\nfailure]
+        RDE2[RawDictEvent\nescape hatch for dicts\ntask_updated, etc.]
+    end
+
+    subgraph Consumer["Consumer — SSE generator loop in chat.py"]
+        LOOP[poll loop\nevery 200 ms]
+        DISC[disconnect check\nrequest.is_disconnected]
+        CANCEL[cancel check\ncancel_event.is_set]
+        SERIALISE[to_sse_line\nor json.dumps item.to_dict]
+        SSE[yield SSE bytes\ndata: JSON]
+    end
+
+    AW --&gt;|emit / emit_dict| EMIT
+    HW --&gt;|emit_dict for HITL events\nclose when BRIDGE_DONE| CLOSE
+    EMIT --&gt; Q
+    EMITD --&gt; Q
+    CLOSE --&gt; SENTINEL
+    SENTINEL --&gt; Q
+
+    Q --&gt; POLL
+    POLL --&gt;|item or TimeoutError| LOOP
+    LOOP --&gt;|TimeoutError| DISC
+    LOOP --&gt;|TimeoutError| CANCEL
+    LOOP --&gt;|BUS_CLOSED| SSE
+    LOOP --&gt;|typed event| SERIALISE
+    SERIALISE --&gt; SSE
+
+    TDE -.-&gt; Q
+    RDE -.-&gt; Q
+    TCE -.-&gt; Q
+    TRE -.-&gt; Q
+    TARE -.-&gt; Q
+    HIRE -.-&gt; Q
+    CE -.-&gt; Q
+    EE -.-&gt; Q
+    RDE2 -.-&gt; Q</code></pre> <hr> <h2 id=3-webhitlbridge-hitl-approval-sequence>3. WebHITLBridge — HITL Approval Sequence<a class=headerlink href=#3-webhitlbridge-hitl-approval-sequence title="Permanent link">&para;</a></h2> <p><code>WebHITLBridge</code> is a <strong>two-way async channel</strong>. The agent blocks on an <code>asyncio.Future</code>. The future's ID is broadcast over SSE to the frontend which shows a UI card. When the user clicks Approve/Deny it POSTs to <code>/chat/respond/{requestId}</code> which calls <code>future.set_result()</code> to unblock the agent. On disconnect, <code>cancel_all_pending()</code> settles all futures immediately so the agent never hangs.</p> <pre class=mermaid><code>sequenceDiagram
+    participant Agent as ReActAgent
+    participant Bridge as WebHITLBridge
+    participant HW as hitl_worker Task
+    participant SSE as SSE Generator
+    participant FE as Frontend Browser
+    participant HIEP as POST /chat/respond
+
+    Note over Agent,FE: Normal HITL approval flow (BLOCKING mode)
+
+    Agent-&gt;&gt;Bridge: tool needs approval\n_handle_approval(request)
+    Bridge-&gt;&gt;Bridge: create asyncio.Future\nstore in _pending[request_id]
+    Bridge-&gt;&gt;Bridge: save payload in _pending_payloads
+    Bridge-&gt;&gt;Bridge: _outgoing.put({type: tool_approval_request, ...})
+    Note over Agent: Agent is BLOCKED\nawait asyncio.wait_for(future, 300s)
+
+    HW-&gt;&gt;Bridge: get_event() — pulls from _outgoing
+    HW-&gt;&gt;SSE: bus.emit_dict({type: tool_approval_request})
+    SSE-&gt;&gt;FE: data: {"type":"tool_approval_request","requestId":"..."}
+
+    FE-&gt;&gt;FE: render ToolApprovalCard
+    FE-&gt;&gt;HIEP: POST /chat/respond/{requestId}\n{"action":"approve"}
+
+    HIEP-&gt;&gt;Bridge: BridgeRegistry.resolve(requestId, data)
+    Bridge-&gt;&gt;Bridge: future.set_result({"action":"approve"})
+    Note over Agent: Agent UNBLOCKS\nreceives ToolApprovalResponse
+
+    Agent-&gt;&gt;Agent: executes tool\ncontinues ReAct loop
+
+    Note over Agent,FE: Browser disconnect while HITL pending
+
+    FE--xSSE: TCP disconnect
+    SSE-&gt;&gt;SSE: poll() → TimeoutError\nrequest.is_disconnected() = True
+    SSE-&gt;&gt;Bridge: cancel_all_pending("session_disconnected")
+    Bridge-&gt;&gt;Bridge: future.set_result({session_disconnected: True})
+    Note over Agent: Agent UNBLOCKS\ngets session_disconnected → DENY
+    SSE-&gt;&gt;SSE: bridge.signal_done()\nagent_task.cancel()
+
+    Note over Bridge: Bridge KEPT ALIVE in BridgeRegistry\n(has_pending was True during the run)\nUser can reconnect and POST respond later</code></pre> <hr> <h2 id=4-reactagent-react-loop-internals>4. ReActAgent — ReAct Loop Internals<a class=headerlink href=#4-reactagent-react-loop-internals title="Permanent link">&para;</a></h2> <p>Shows the full Think → Act → Observe loop: LLM generates text/tool calls, each tool either runs directly or goes through the approval handler, results feed back into memory, and the loop repeats until <code>finish_reason=stop</code> or <code>max_iterations</code> is hit.</p> <pre class=mermaid><code>flowchart TD
+    START([run_stream called\nwith user_content]) --&gt; SEED
+
+    SEED[seed system message\nif memory empty] --&gt; IGSEED
+
+    IGSEED[run input guardrails\nMaxTokenGuardrail etc.] --&gt; ADDUSER
+
+    ADDUSER[memory.add_message\nUserMessage] --&gt; LLM
+
+    LLM[call LLM\nmodel_client.generate_stream\nwith SlidingWindowContext] --&gt; STREAM
+
+    STREAM{LLM response\ntype?}
+
+    STREAM --&gt;|TextDelta chunk| TXT[yield TextDeltaChunk\nto caller]
+    TXT --&gt; STREAM
+
+    STREAM --&gt;|ReasoningDelta chunk| RSN[yield ReasoningDeltaChunk\nto caller]
+    RSN --&gt; STREAM
+
+    STREAM --&gt;|CompletionChunk\nfinish_reason=stop| DONE_NO_TOOLS
+
+    STREAM --&gt;|CompletionChunk\nfinish_reason=tool_calls| PARSE
+
+    DONE_NO_TOOLS[yield CompletionChunk\nmemory.add_message AssistantMessage\nrun output guardrails] --&gt; RETURN
+
+    PARSE[parse tool calls\nnormalise to _ParsedToolCall list] --&gt; ADDASSIST
+
+    ADDASSIST[memory.add_message\nAssistantMessage with tool_calls] --&gt; ITERTOOLS
+
+    ITERTOOLS[for each tool call...] --&gt; APPROVAL
+
+    APPROVAL{tool in\ntools_requiring_approval?}
+
+    APPROVAL --&gt;|yes| HITL_CHECK[call tool_approval_handler\nwait for future\nblocking / timeout / fire-and-continue]
+
+    HITL_CHECK --&gt;|DENY| SKIP[emit synthetic\nTool Denied result]
+    HITL_CHECK --&gt;|APPROVE may modify args| EXEC
+
+    APPROVAL --&gt;|no| EXEC
+
+    EXEC[execute tool\ntool.execute with timeout\ntool_retry_policy on error] --&gt; RESULT
+
+    RESULT[yield ToolExecutionResultMessage\nmemory.add_message result] --&gt; NEXTCALL
+
+    NEXTCALL{more tool calls\nin this iteration?}
+    NEXTCALL --&gt;|yes| APPROVAL
+    NEXTCALL --&gt;|no| CHECKITER
+
+    SKIP --&gt; NEXTCALL
+
+    CHECKITER{iterations &lt;\nmax_iterations?}
+    CHECKITER --&gt;|yes, loop again| LLM
+    CHECKITER --&gt;|no, max hit| FORCESTOP[yield ErrorEvent\nmax iterations reached]
+
+    RETURN([AgentRunResult\nwith all steps])
+    FORCESTOP --&gt; RETURN</code></pre> <hr> <h2 id=5-memory-system-redis-hot-path-postgresql-cold-store>5. Memory System — Redis Hot Path + PostgreSQL Cold Store<a class=headerlink href=#5-memory-system-redis-hot-path-postgresql-cold-store title="Permanent link">&para;</a></h2> <p>On every request, <code>RedisMemory.restore()</code> tries Redis first and loads <strong>all</strong> stored messages into the local in-process list. On a miss it reads from Postgres and seeds Redis. During the run, every <code>add_message()</code> does a <strong>fire-and-forget background <code>RPUSH</code></strong> to Redis — no blocking writes. <code>SlidingWindowContext</code> is the <em>only</em> layer that limits history — it selects the last <code>model_context_window</code> messages at LLM-call time. Postgres is written synchronously only for <code>CompletionChunk</code> and <code>ToolResultMessage</code> (inline, before the SSE event is emitted).</p> <pre class=mermaid><code>flowchart TD
+    subgraph Request["Per-Request Flow in agent_service.py"]
+        START([load_agent_for_thread called]) --&gt; TRY_REDIS
+
+        TRY_REDIS[per_request_mem = RedisMemory.for_session\nshares parent connection pool] --&gt; RESTORE
+
+        RESTORE[await per_request_mem.restore\nloads ALL messages from Redis\nno limit -- full history] --&gt; HIT?
+
+        HIT?{Redis hit?\nmessages found?}
+
+        HIT? --&gt;|yes, hot path| HOT[use per_request_mem directly\nfull history in local list\nalready loaded]
+
+        HIT? --&gt;|no, cold path| COLD[load_messages_for_memory\nfetch ordered steps from PostgreSQL]
+
+        COLD --&gt; REBUILD[_rebuild_messages\nmap step rows to message objects\nSystemMessage UserMessage\nAssistantMessage ToolExecutionResultMessage]
+
+        REBUILD --&gt; SEED_REDIS[add all messages to RedisMemory\nseeds Redis from Postgres cold store]
+
+        SEED_REDIS --&gt; HOT
+
+        HOT --&gt; CTX[wrap in SlidingWindowContext\nmax_messages = context_window e.g. 40\nfilters at LLM-call time -- LLM sees last N\nfull history kept in local list + Redis]
+
+        CTX --&gt; AGENT[create ReActAgent\nwith per_request_mem + SlidingWindowContext\nall add_message calls write-through\nto Redis via fire-and-forget task]
+    end
+
+    subgraph WriteThrough["Write-Through During Agent Run"]
+        AT[agent.run_stream\nadd_message on every step] --&gt; ADD
+
+        ADD[RedisMemory.add_message\nappends to local list\nschedules background task] --&gt; BG
+
+        BG[asyncio background task\nRPUSH to Redis\nLTRIM to max_messages cap\nEXPIRE TTL refresh]
+    end
+
+    subgraph PersistRun["Inline DB Persistence in agent_worker"]
+        COMP[CompletionChunk received\nby agent_worker] --&gt; PCOMP
+
+        PCOMP[persist_assistant_message\nPOSTGRES upsert\nBEFORE yielding SSE event]
+
+        TR[ToolExecutionResultMessage\nreceived] --&gt; PTR
+
+        PTR[persist_tool_result\nPOSTGRES insert\nBEFORE yielding SSE event]
+    end
+
+    AGENT --&gt; AT
+    AGENT --&gt; COMP
+    AGENT --&gt; TR
+
+    Redis[("Redis 7\nLIST per session_id\nkey: session:ID:messages\ncap: max_messages e.g. 200\nttl: REDIS_SESSION_TTL")] -.-&gt; RESTORE
+    BG -.-&gt; Redis
+    PG[(PostgreSQL 16\nsteps table per thread)] -.-&gt; COLD
+    PCOMP -.-&gt; PG
+    PTR -.-&gt; PG</code></pre> <hr> <h2 id=6-servercontext-di-container-locks-and-cancel-registry>6. ServerContext — DI Container, Locks and Cancel Registry<a class=headerlink href=#6-servercontext-di-container-locks-and-cancel-registry title="Permanent link">&para;</a></h2> <p><code>ServerContext</code> is the single DI container assembled at startup. The <code>thread_locks</code> dict prevents concurrent streams on the same thread (returns 409). The <code>cancel_registry</code> dict maps thread IDs to <code>asyncio.Event</code>s; the cancel route sets the event and the poll loop detects it within the next 200 ms poll window.</p> <pre class=mermaid><code>graph TB
+    subgraph AppLifecycle["FastAPI Lifespan — app.py startup"]
+        OTEL[configure OpenTelemetry\nOTLP → Tempo]
+        DBInit[init_db\nSQLAlchemy async engine]
+        RedisInit[RedisMemory global\nconnect TCP pool]
+        FSInit[create_file_store\nLocalFileStore or S3FileStore\n+ optional EncryptedFileStore]
+        ModelClient[OpenAIClient\ngpt-4o-mini]
+        AudioClient[OpenAIAudioClient\ntranscription + TTS + realtime]
+        BRInit[BridgeRegistry\nper-thread HITL bridge pool]
+        ToolReg[ToolRegistry\nregister all tools at startup]
+        CTX_BUILT[build ServerContext\nall deps bundled]
+        STATE[app.state.ctx = ctx]
+    end
+
+    subgraph ServerContext["ServerContext dataclass — context.py"]
+        SC[ServerContext]
+        SC --&gt; MC[model_client\nOpenAIClient]
+        SC --&gt; AC[audio_client\nOpenAIAudioClient]
+        SC --&gt; RM2[redis_memory\nglobal RedisMemory]
+        SC --&gt; TR2[tools\nToolRegistry]
+        SC --&gt; BR2[bridge_registry\nBridgeRegistry]
+        SC --&gt; TRA[tools_requiring_approval\nlist of tool names]
+        SC --&gt; SI[system_instructions\nloaded from prompts/default_system.md]
+        SC --&gt; TT[tool_timeout float]
+        SC --&gt; CR[cancel_registry\ndict thread_id → asyncio.Event]
+        SC --&gt; TL[thread_locks\ndict thread_id → asyncio.Lock]
+        SC --&gt; SF[session_factory\nSQLAlchemy async factory]
+        SC --&gt; MCP2[mcp_servers\ndict name → config]
+        SC --&gt; CI[ci_client\nCodeInterpreterClient optional]
+        SC --&gt; FS2[file_store\nFileStore ABC\nLocalFileStore or S3FileStore]
+    end
+
+    subgraph SingleFlight["Single-Flight Lock — thread_locks"]
+        TL --&gt; SFL[setdefault: create Lock if missing]
+        SFL --&gt; LOCKED{locked?}
+        LOCKED --&gt;|yes| HTTP409[raise 409\nstream already running]
+        LOCKED --&gt;|no| ACQUIRE[acquire lock\nfor SSE generator lifetime]
+        ACQUIRE --&gt; FINREL[finally: release lock\npop from dict on stream end]
+    end
+
+    subgraph CancelReg["Cancel Registry — cancel_registry"]
+        CR --&gt; CRK[key: str thread_id]
+        CRK --&gt; EVT[value: asyncio.Event]
+        EVT --&gt; CPOST[POST /chat/cancel\n→ event.set]
+        CPOST --&gt; POLLED[poll loop detects\ncancel_event.is_set]
+        POLLED --&gt; CANYIELD[yield cancelled SSE]
+    end
+
+    OTEL &amp; DBInit &amp; RedisInit &amp; FSInit &amp; ModelClient &amp; AudioClient &amp; BRInit &amp; ToolReg --&gt; CTX_BUILT --&gt; STATE
+
+    subgraph DI["Dependency Injection — get_ctx"]
+        GETCTX["def get_ctx(request: Request)\n→ request.app.state.ctx"]
+    end
+
+    STATE -.-&gt; GETCTX
+    GETCTX -.-&gt;|"Depends(get_ctx) in every route"| SC</code></pre> <hr> <h2 id=7-complete-end-to-end-flow>7. Complete End-to-End Flow<a class=headerlink href=#7-complete-end-to-end-flow title="Permanent link">&para;</a></h2> <p>The full lifecycle of a user message across all 7 phases: request setup → memory restore → file context build → direct text response → tool call → HITL approval → cancel/disconnect.</p> <blockquote> <p><strong>EventBus</strong> is an in-process <code>asyncio.Queue</code> — not a network service. It is not shown as a participant; instead the agent_worker emits events to it and the SSE generator polls it, both inside the same process.</p> </blockquote> <pre class=mermaid><code>sequenceDiagram
+    autonumber
+    participant FE as Frontend\n(page.tsx)
+    participant ChatAPI as POST /chat\n(chat.py)
+    participant AgSvc as agent_service\nload_agent_for_thread
+    participant Redis as Redis 7\nHot Store
+    participant PG as PostgreSQL\nCold Store
+    participant FileStore as FileStore\n(local / S3)
+    participant ReAct as ReActAgent\nreact_agent.py
+    participant OAI as OpenAI API
+    participant Tools as Tools\n(executor)
+    participant Bridge as WebHITLBridge\nhitl.py
+    participant HIRE as POST /chat/respond\n(hitl.py)
+
+    Note over FE,HIRE: ═══ STARTUP (once) ═══
+    Note over ChatAPI: app.state.ctx = ServerContext\n(model_client, bridge_registry,\nredis_memory, tools, file_store, locks, ...)
+
+    Note over FE,HIRE: ═══ PHASE 1 — Request Setup ═══
+
+    FE-&gt;&gt;ChatAPI: POST /chat {thread_id, messages[]}
+    ChatAPI-&gt;&gt;PG: get_thread(thread_id) — validate exists
+    ChatAPI-&gt;&gt;ChatAPI: thread_locks.setdefault(thread_id, Lock)\nif locked → 409 Conflict
+    ChatAPI-&gt;&gt;ChatAPI: thread_lock.acquire()
+    ChatAPI-&gt;&gt;Bridge: bridge_registry.acquire(thread_id)\nget or create WebHITLBridge
+    ChatAPI-&gt;&gt;AgSvc: load_agent_for_thread(thread_id, ...)
+
+    Note over FE,HIRE: ═══ PHASE 2 — Memory Restore ═══
+
+    AgSvc-&gt;&gt;Redis: RedisMemory.restore()\nLRANGE session:{id}:messages 0 -1
+    alt Redis HIT (hot path)
+        Redis--&gt;&gt;AgSvc: ALL stored messages (up to max_messages cap)
+        Note over AgSvc: full history loaded into local in-process list
+    else Redis MISS (cold path)
+        Redis--&gt;&gt;AgSvc: empty
+        AgSvc-&gt;&gt;PG: load_messages_for_memory(thread_id)\nSELECT steps ORDER BY created_at
+        PG--&gt;&gt;AgSvc: step rows
+        AgSvc-&gt;&gt;AgSvc: _rebuild_messages(rows)\nSystemMessage + UserMessage +\nAssistantMessage + ToolResultMessage
+        AgSvc-&gt;&gt;Redis: add_message for each — seeds Redis from Postgres
+    end
+    AgSvc-&gt;&gt;AgSvc: wrap in SlidingWindowContext(max=model_context_window)\nfilters at LLM-call time — last N msgs sent to OpenAI\nfull history stays in local list and Redis
+    AgSvc--&gt;&gt;ChatAPI: ReActAgent ready
+
+    Note over FE,HIRE: ═══ PHASE 3 — File Context + Persist Setup ═══
+
+    ChatAPI-&gt;&gt;PG: get_files_by_ids(file_ids) — query FileMetadata
+    PG--&gt;&gt;ChatAPI: FileMetadata records
+    ChatAPI-&gt;&gt;FileStore: extract_text(store, meta) per attached file
+    FileStore--&gt;&gt;ChatAPI: extracted text bytes
+    ChatAPI-&gt;&gt;ChatAPI: hooks.fire_message(hook_ctx, user_content)
+    ChatAPI-&gt;&gt;PG: persist_user_message(thread_id, content)
+    Note over ChatAPI: EventBus() — create fresh in-process asyncio.Queue\nasyncio.create_task(agent_worker)\nasyncio.create_task(hitl_worker)
+    ChatAPI--&gt;&gt;FE: StreamingResponse (SSE)\nContent-Type: text/event-stream
+
+    Note over FE,HIRE: ═══ PHASE 4 — Direct Response (no tools) ═══
+
+    activate ChatAPI
+    ChatAPI-&gt;&gt;ReAct: agent.run_stream(user_content)
+    ReAct-&gt;&gt;Redis: memory.add_message(UserMessage)\nfire-and-forget background RPUSH
+    ReAct-&gt;&gt;OAI: generate_stream(messages, tools)\nSlidingWindowContext builds prompt
+    OAI--&gt;&gt;ReAct: TextDelta chunks...
+    ReAct--&gt;&gt;ChatAPI: yield TextDeltaChunk
+    Note over ChatAPI: agent_worker emits event to in-process EventBus\nSSE generator polls bus and streams to FE
+    ChatAPI--&gt;&gt;FE: data: {"type":"text_delta","content":"Hello..."}
+
+    OAI--&gt;&gt;ReAct: CompletionChunk finish_reason=stop
+    ReAct-&gt;&gt;Redis: memory.add_message(AssistantMessage)
+    ReAct--&gt;&gt;ChatAPI: yield CompletionChunk
+    ChatAPI-&gt;&gt;PG: persist_assistant_message BEFORE emitting
+    ChatAPI--&gt;&gt;FE: data: {"type":"completion","content":"..."}
+
+    ChatAPI-&gt;&gt;Bridge: agent_worker finally: bridge.signal_done() — BRIDGE_DONE sentinel
+    Bridge--&gt;&gt;ChatAPI: hitl_worker gets BRIDGE_DONE → bus.close()
+    ChatAPI--&gt;&gt;FE: data: [DONE]
+    ChatAPI-&gt;&gt;ChatAPI: finally: release lock\npop cancel_registry\nbridge_registry.release_if_idle
+
+    Note over FE,HIRE: ═══ PHASE 5 — Tool Call Path ═══
+
+    OAI--&gt;&gt;ReAct: CompletionChunk finish_reason=tool_calls\n[{name:"calculator", arguments:{...}}]
+    ReAct-&gt;&gt;ReAct: parse tool calls → _ParsedToolCall
+    ReAct-&gt;&gt;ReAct: memory.add_message(AssistantMessage with tool_calls)
+
+    alt Tool NOT in tools_requiring_approval
+        ReAct-&gt;&gt;Tools: tool.execute(**arguments)
+        Tools--&gt;&gt;ReAct: ToolResult(content="42")
+        ReAct-&gt;&gt;Redis: memory.add_message(ToolExecutionResultMessage)
+        ReAct--&gt;&gt;ChatAPI: yield ToolExecutionResultMessage
+        ChatAPI-&gt;&gt;PG: persist_tool_result BEFORE emitting
+        ChatAPI--&gt;&gt;FE: data: {"type":"tool_result","tool_name":"calculator","result":"42"}
+    end
+    ReAct-&gt;&gt;OAI: next LLM call with tool result in context
+
+    Note over FE,HIRE: ═══ PHASE 6 — HITL Tool Approval Path ═══
+
+    OAI--&gt;&gt;ReAct: CompletionChunk finish_reason=tool_calls\n[{name:"delete_file", arguments:{...}}]
+    Note over ReAct: delete_file IS in tools_requiring_approval
+
+    ReAct-&gt;&gt;Bridge: tool_approval_handler._handle_approval(ToolApprovalRequest)
+    Bridge-&gt;&gt;Bridge: create asyncio.Future()\n_pending[request_id] = future
+    Bridge-&gt;&gt;Bridge: _outgoing.put({type: tool_approval_request, ...})
+    Note over ReAct: BLOCKED — awaiting future.set_result
+
+    activate Bridge
+    ChatAPI-&gt;&gt;Bridge: hitl_worker: get_event()
+    Bridge--&gt;&gt;ChatAPI: {type: tool_approval_request, requestId: "abc"}
+    ChatAPI--&gt;&gt;FE: data: {"type":"tool_approval_request","requestId":"abc"}
+    FE-&gt;&gt;FE: render ToolApprovalCard
+
+    FE-&gt;&gt;HIRE: POST /chat/respond/abc\n{"action":"approve"}
+    HIRE-&gt;&gt;Bridge: BridgeRegistry.resolve("abc", {action:"approve"})
+    Bridge-&gt;&gt;Bridge: future.set_result({"action":"approve"})
+    deactivate Bridge
+    Note over ReAct: UNBLOCKED — returns ToolApprovalResponse APPROVE
+
+    ReAct-&gt;&gt;Tools: tool.execute(**arguments)
+    Tools--&gt;&gt;ReAct: ToolResult
+    ReAct--&gt;&gt;ChatAPI: yield ToolExecutionResultMessage
+    ChatAPI--&gt;&gt;FE: data: {"type":"tool_result",...}
+
+    Note over FE,HIRE: ═══ PHASE 7 — Cancel / Disconnect ═══
+
+    FE-&gt;&gt;ChatAPI: POST /chat/{thread_id}/cancel
+    ChatAPI-&gt;&gt;ChatAPI: cancel_registry[thread_id].set()
+    Note over ChatAPI: poll() → TimeoutError\ncancel_event.is_set() = True
+    ChatAPI-&gt;&gt;ReAct: agent_task.cancel()
+    ChatAPI--&gt;&gt;FE: data: {"type":"cancelled"}
+    ChatAPI--&gt;&gt;FE: data: [DONE]
+    deactivate ChatAPI</code></pre> <hr> <h2 id=8-file-storage-architecture>8. File Storage Architecture<a class=headerlink href=#8-file-storage-architecture title="Permanent link">&para;</a></h2> <p>Four-zone view of the file storage subsystem: API ingress → service functions → storage abstraction → persistence backends.</p> <pre class=mermaid><code>flowchart TD
+    subgraph APILayer["🌐 API Layer"]
+        FilesRoute["FilesRoute\nPOST /files (upload)\nGET /files (list)\nGET /files/{id} (download)\nDELETE /files/{id}"]
+        FMT["FileManagerTool\nagent-facing CRUD\ncurrent_thread_id ContextVar"]
+    end
+
+    subgraph ServiceLayer["⚙️ Service Layer — file_service.py"]
+        SaveFile["save_file()\nwrite bytes → store\ninsert FileMetadata row"]
+        ListFiles["list_files()\nSELECT FileMetadata\nby thread / user / org"]
+        GetFile["get_file()\nfetch bytes from store\nchecks ownership"]
+        DeleteFile["delete_file()\ndelete from store\ndelete FileMetadata row"]
+        ExtractText["extract_text()\nplain-text → raw bytes\nPDF/image → placeholder"]
+        GetURL["get_file_url()\npresigned URL (S3)\nor local /files/{id}"]
+        PurgeThread["purge_thread_files()\ndelete all files for\na thread on cleanup"]
+    end
+
+    subgraph StorageLayer["🗂️ Storage Layer — core/storage/"]
+        FSAbC["FileStore ABC\nput / get / delete / copy\nlist / exists / make_public_url"]
+        LocalFS["LocalFileStore\nlocal disk volume\npath = base_dir/{tenant_path}"]
+        S3FS["S3FileStore\naiobotocore async\nbucket/{tenant_path}"]
+        EncFS["EncryptedFileStore\nAES-256-GCM wrapper\ntransparent encrypt/decrypt on put/get"]
+        TC["TenantContext path builder\norg/{org_id}/user/{user_id}/\nthread/{thread_id}/{scope}/"]
+        Factory["create_file_store(settings)\ndispatches on FILE_STORE_BACKEND\n+ wraps EncryptedFileStore\nif FILE_STORE_ENCRYPT=true"]
+    end
+
+    subgraph PersistenceLayer["💾 Persistence Layer"]
+        PGMeta[("PostgreSQL\nFileMetadata table\nid, thread_id, user_id, org_id\nstore_key, filename, mime_type\nsize_bytes, created_at")]
+        ObjStore[("LocalFS volume\nor MinIO / AWS S3\nraw file bytes")]
+    end
+
+    FilesRoute --&gt; SaveFile &amp; ListFiles &amp; GetFile &amp; DeleteFile &amp; GetURL
+    FMT --&gt; SaveFile &amp; ListFiles &amp; GetFile &amp; DeleteFile
+
+    SaveFile &amp; GetFile &amp; DeleteFile &amp; ExtractText &amp; GetURL &amp; PurgeThread --&gt; FSAbC
+    SaveFile &amp; ListFiles &amp; GetFile &amp; DeleteFile --&gt; PGMeta
+
+    FSAbC --&gt; LocalFS &amp; S3FS
+    LocalFS &amp; S3FS --&gt; EncFS
+    Factory --&gt; LocalFS &amp; S3FS
+    FSAbC --&gt; TC
+
+    LocalFS --&gt; ObjStore
+    S3FS --&gt; ObjStore</code></pre> <aside class=md-source-file> <span class=md-source-file__fact> <span class=md-icon title="Last update"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 28, 2026 07:57:40 UTC"><span class=timeago datetime=2026-03-28T07:57:40+00:00 locale=en></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 28, 2026 07:57:40 UTC">2026-03-28</span> </span> <span class=md-source-file__fact> <span class=md-icon title=Created> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg> </span> <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="March 21, 2026 21:08:45 UTC"><span class=timeago datetime=2026-03-21T21:08:45+00:00 locale=en></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="March 21, 2026 21:08:45 UTC">2026-03-21</span> </span> </aside> </article> </div> <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script> <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script> </div> <button type=button class="md-top md-icon" data-md-component=top hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg> Back to top </button> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> Copyright &copy; 2024–2026 Ravikumar Chavva </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> <div class=md-social> <a href=https://github.com/Ravikumarchavva/raavan target=_blank rel=noopener title=github.com class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 512 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg> </a> <a href=https://pypi.org/project/raavan/ target=_blank rel=noopener title=pypi.org class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 444.7a20.4 20.4 0 1 1 0-40.7 20.4 20.4 0 1 1 0 40.7M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.6-183.4a20.4 20.4 0 1 1 0 40.8 20.4 20.4 0 1 1 0-40.8"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <div class=md-progress data-md-component=progress role=progressbar></div> <script id=__config type=application/json>{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow", "header.autohide"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script> <script src=../assets/javascripts/bundle.79ae519e.min.js></script> <script src=../js/timeago.min.js></script> <script src=../js/timeago_mkdocs_material.js></script> <script src=../javascripts/mathjax.js></script> <script src=https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js></script> </body> </html>
